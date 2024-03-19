@@ -6,6 +6,14 @@ public class Text {
 
     private int titleNum;
 
+    Text() {
+    }
+
+    Text(String title, String content, int titleNum) {
+        this.title = title;
+        this.content = content;
+        this.titleNum = titleNum;
+    }
 
     public void setTitle(String title) {
         this.title = title;

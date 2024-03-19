@@ -7,8 +7,8 @@ public class BoardApp {
     ArrayList<Text> text = new ArrayList<>();
 
     public void run() {
-        int titleNum = 1;
-
+        int titleNum = 4;
+        makeTestList();
         while (true) {
             System.out.print("명령어를 입력해주세요 :");
             Scanner sc = new Scanner(System.in);
@@ -49,20 +49,61 @@ public class BoardApp {
                 text.get(index).setTitle(updateTitle);
                 text.get(index).setContent(updateContent);
 
-            }else if(cmd.equals("delete")){
+            } else if (cmd.equals("delete")) {
+                System.out.print("삭제할 게시물의 번호를 입력해주세요 :");
+                int index = getParmIndex(sc.nextLine());
+                if (index != -1) {
+                    text.remove(index);
+                    System.out.println("게시물이 삭제 되었습니다.");
+                }else if( index == -1){
+                    System.out.println("없는 게시물 입니다.");
+                }
 
+            } else if (cmd.equals("detail")) {
+                System.out.print("상세보기할 게시물의 번호를 입력해주세요 :");
+                int index = getParmIndex(sc.nextLine());
+                if (index != -1) {
+                    System.out.println("제목 : " + text.get(index).getTitle());
+                    System.out.println("내용 : " + text.get(index).getContent());
+                }else if( index == -1){
+                    System.out.println("없는 게시물 입니다.");
+                }
             }
-
         }
+
     }
 
+
     public int getIndexNum(int num) {
-        for (int i = 0; i <= text.size(); i++) {
+        for (int i = 0; i < text.size(); i++) {
             Text t1 = text.get(i);
             if (t1.getTitleNum() == num) {
                 return i;
             }
         }
         return -1;
+    }
+
+    public int getParmIndex(String num) {
+        try {
+            int textNum = Integer.parseInt(num);
+            int index = getIndexNum(textNum);
+            return index;
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요.");
+            return -1;
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("없는 게시물 입니다.");
+            return -1;
+        }
+    }
+
+    public void makeTestList() {
+        Text t1 = new Text("안녕하세여", "반갑습니다", 1);
+        text.add(t1);
+        Text t2 = new Text("자바공부", "어렵나요", 2);
+        text.add(t2);
+        Text t3 = new Text("요즘날씨", "추워용", 3);
+        text.add(t3);
     }
 }
