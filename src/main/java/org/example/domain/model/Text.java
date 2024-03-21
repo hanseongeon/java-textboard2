@@ -1,10 +1,11 @@
-package org.example;
+package org.example.domain.model;
 
 public class Text {
     private String title;
     private String content;
 
     private int titleNum;
+    private String regDate;
 
     Text() {
     }
@@ -37,5 +38,13 @@ public class Text {
 
     public void setTitleNum(int tilteNum) {
         this.titleNum = tilteNum;
+    }
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
     }
 }
